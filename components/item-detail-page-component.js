@@ -15,10 +15,10 @@ export default {
   },
   template: /* html */ `
     <section class="container py-4">
-      <router-link to="/items" class="btn btn-link ps-0 mb-3">← Back to collection</router-link>
+      <router-link to="/items" class="btn btn-link ps-0 mb-3">← Back to services</router-link>
 
       <div v-if="itemsStore.isLoading" class="alert alert-secondary" role="status">
-        Loading item details...
+        Loading service details...
       </div>
 
       <div v-else-if="itemsStore.error" class="alert alert-danger" role="alert">
@@ -26,7 +26,7 @@ export default {
       </div>
 
       <div v-else-if="!selectedItem" class="alert alert-warning" role="alert">
-        Item not found.
+        Service not found.
       </div>
 
       <article v-else class="card shadow-sm border-0 overflow-hidden">
@@ -48,8 +48,10 @@ export default {
           </div>
 
           <p class="lead mb-3">{{ selectedItem.description || 'No description available.' }}</p>
-          <p class="mb-0"><strong>Location:</strong> {{ selectedItem.location || 'N/A' }}</p>
-          <p class="text-muted mt-2 mb-0"><strong>Item ID:</strong> {{ selectedItem.id }}</p>
+          <p v-if="selectedItem.location" class="mb-3"><strong>Location:</strong> {{ selectedItem.location }}</p>
+          <div class="alert services-note mb-0" role="note">
+            Availability and eligibility vary. Contact the provider to confirm service details and possible next steps.
+          </div>
         </div>
       </article>
     </section>
